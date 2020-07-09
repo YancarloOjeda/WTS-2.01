@@ -74,13 +74,25 @@ Font_1 = 'Sans'
 #Dir_Archivo_Datos = '/home/yancarlo/WALDEN/Data/'
 #Dir_Images = '/home/yancarlo/WALDEN/Images'
 
-Dir_Videos = 'C:/WALDEN/Videos/'
-Dir_Proyecto = 'C:/WALDEN/Projects/' 
-Dir_Datos = 'C:/WALDEN/Data/'
-Dir_Archivo_PRef = 'C:/WALDEN/Schedules'
-Dir_Archivo_Parametros = 'C:/WALDEN/Config/'
-Dir_Archivo_Datos = 'C:/WALDEN/Data/'
-Dir_Images = 'C:/WALDEN/Images/'
+# Dir_Videos = 'C:/WALDEN/Videos/'
+# Dir_Proyecto = 'C:/WALDEN/Projects/' 
+# Dir_Datos = 'C:/WALDEN/Data/'
+# Dir_Archivo_PRef = 'C:/WALDEN/Schedules'
+# Dir_Archivo_Parametros = 'C:/WALDEN/Config/'
+# Dir_Archivo_Datos = 'C:/WALDEN/Data/'
+# Dir_Images = 'C:/WALDEN/Images/'
+
+Dir_System = open("data.txt", "r")
+Dir_System = Dir_System.read() + '/WTS-2.01/'
+
+
+Dir_Videos = Dir_System+'Videos/'
+Dir_Proyecto = Dir_System +'Projects/' 
+Dir_Datos = Dir_System+'Data/'
+Dir_Archivo_PRef = Dir_System+'Schedules'
+Dir_Archivo_Parametros = Dir_System+'Config/'
+Dir_Archivo_Datos = Dir_System+'Data/'
+Dir_Images = Dir_System+'Images/'
 
 
 #Dir_Videos = 'C:/Users/Laurent/Documents/WALDEN/Videos/'
@@ -219,7 +231,7 @@ def Fun_AbrirVentanaMenuPrincipal1():
         except:
             print('')
             
-    U_Z = 'A0001.WTS.1.01.N9KA-GPXT-WFJC-MPDW'
+#    U_Z = 'A0001.WTS.1.01.N9KA-GPXT-WFJC-MPDW'
     if U_Z == U_Y:
         Fun_AbrirVentanaMenuPrincipal2()        
     else:
@@ -1385,13 +1397,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                                 except:
                                     Img_WebCam = Img_WebCam
                                     
-                                    
-                                if Img_WebCam.shape[0] > Img_WebCam.shape[1]:     
-                                    Img_WebCam = cv2.resize(Img_WebCam,(int((400/Img_WebCam.shape[0])*Img_WebCam.shape[1]), 400))
-                                elif Img_WebCam.shape[0] < Img_WebCam.shape[1]:     
-                                    Img_WebCam = cv2.resize(Img_WebCam,(400, int((400/Img_WebCam.shape[1])*Img_WebCam.shape[0])))
-                                else:
-                                    Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
+                                Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
                                 cv2.putText(Img_WebCam,'T: ',(5,15),Font_CV, .5,(255,255,255),1)
                                 cv2.putText(Img_WebCam,str(round(Mat_Datos[Int_Contador-1][0] ,2)),(20,15),Font_CV, .5,(255,255,255),1)
                                 cv2.imshow('Tracking',Img_WebCam)
@@ -1433,7 +1439,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                             for i in range(0,len(Mat_Datos)): 
                                 Archivo_Mat_Datos.write(str(i) + ',' + str(round(Mat_Datos[i][0],3)) +
                                                                  ',' + str(round(Mat_Datos[i][1] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
-                                                                 ',' + str(round(Mat_Datos[i][2] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
+                                                                 ',' + str(round(Mat_Datos[i][2] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[16])),3)) +
                                                                  ',' + str(round(Mat_Datos[i][5],3)) +
                                                                  ',' + str(round(Mat_Datos[i][3],3)) +
                                                                  ',' + str(Mat_Datos[i][4]) + '\n')
@@ -1545,7 +1551,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                                 for i in range(0,len(Mat_Datos)): 
                                     Archivo_Mat_Datos.write(str(i) + ';' + str(round(Mat_Datos[i][0],3)) +
                                                                      ';' + str(round(Mat_Datos_X[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
-                                                                     ';' + str(round(Mat_Datos_Y[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
+                                                                     ';' + str(round(Mat_Datos_Y[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[16])),3)) +
                                                                      ';' + str(round((Mat_Datos_D[i,j]/100)/float(Int_Frame),3)) +
                                                                      ';' + str(round(Mat_Datos_D[i][j],3)) +
                                                                      ';' + str(Mat_Datos[i][4]) + '\n')
@@ -2003,7 +2009,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                             for i in range(0,len(Mat_Datos)): 
                                 Archivo_Mat_Datos.write(str(i) + ',' + str(round(Mat_Datos[i][0],3)) +
                                                                  ',' + str(round(Mat_Datos[i][1] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
-                                                                 ',' + str(round(Mat_Datos[i][2] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
+                                                                 ',' + str(round(Mat_Datos[i][2] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[16])),3)) +
                                                                  ',' + str(round(Mat_Datos[i][6] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[16])),3)) +
                                                                  ',' + str(round(Mat_Datos[i][3],3)) +
                                                                  ',' + str(Mat_Datos[i][4]) + ';' + str(Mat_Datos[i][6]) +
@@ -2174,7 +2180,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                                 for i in range(0,len(Mat_Datos)): 
                                     Archivo_Mat_Datos.write(str(i) + ';' + str(round(Mat_Datos[i][0],3)) +
                                                                      ';' + str(round(Mat_Datos_X[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
-                                                                     ';' + str(round(Mat_Datos_Y[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
+                                                                     ';' + str(round(Mat_Datos_Y[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[16])),3)) +
                                                                      ';' + str(round((Mat_Datos_D[i,j]/100)/Mat_Datos[i,0],3)) +
                                                                      ';' + str(round(Mat_Datos_D[i][j],3)) +
                                                                      ';' + '0' + '\n')
@@ -3621,12 +3627,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                                 except:
                                     Img_WebCam = Img_WebCam
                                     
-                                if Img_WebCam.shape[0] > Img_WebCam.shape[1]:     
-                                    Img_WebCam = cv2.resize(Img_WebCam,(int((400/Img_WebCam.shape[0])*Img_WebCam.shape[1]), 400))
-                                elif Img_WebCam.shape[0] < Img_WebCam.shape[1]:     
-                                    Img_WebCam = cv2.resize(Img_WebCam,(400, int((400/Img_WebCam.shape[1])*Img_WebCam.shape[0])))
-                                else:
-                                    Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
+                                Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
                                 cv2.putText(Img_WebCam,'T: ',(5,15),Font_CV, .5,(255,255,255),1)
                                 cv2.putText(Img_WebCam,str(round(Mat_Datos[Int_Contador-1][0] ,2)),(20,15),Font_CV, .5,(255,255,255),1)
                                 cv2.imshow('Tracking',Img_WebCam)
@@ -3668,7 +3669,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                             for i in range(0,len(Mat_Datos)): 
                                 Archivo_Mat_Datos.write(str(i) + ',' + str(round(Mat_Datos[i][0],3)) +
                                                                  ',' + str(round(Mat_Datos[i][1] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
-                                                                 ',' + str(round(Mat_Datos[i][2] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
+                                                                 ',' + str(round(Mat_Datos[i][2] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[16])),3)) +
                                                                  ',' + str(round(Mat_Datos[i][5],3)) +
                                                                  ',' + str(round(Mat_Datos[i][3],3)) +
                                                                  ',' + str(Mat_Datos[i][4]) + '\n')
@@ -3780,7 +3781,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                                 for i in range(0,len(Mat_Datos)): 
                                     Archivo_Mat_Datos.write(str(i) + ';' + str(round(Mat_Datos[i][0],3)) +
                                                                      ';' + str(round(Mat_Datos_X[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
-                                                                     ';' + str(round(Mat_Datos_Y[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
+                                                                     ';' + str(round(Mat_Datos_Y[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[16])),3)) +
                                                                      ';' + str(round((Mat_Datos_D[i,j]/100)/float(Int_Frame),3)) +
                                                                      ';' + str(round(Mat_Datos_D[i][j],3)) +
                                                                      ';' + str(Mat_Datos[i][4]) + '\n')
@@ -4036,13 +4037,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                                 except:
                                     Img_WebCam = Img_WebCam
                             
-                                    
-                                if Img_WebCam.shape[0] > Img_WebCam.shape[1]:     
-                                    Img_WebCam = cv2.resize(Img_WebCam,(int((400/Img_WebCam.shape[0])*Img_WebCam.shape[1]), 400))
-                                elif Img_WebCam.shape[0] < Img_WebCam.shape[1]:     
-                                    Img_WebCam = cv2.resize(Img_WebCam,(400, int((400/Img_WebCam.shape[1])*Img_WebCam.shape[0])))
-                                else:
-                                    Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
+                                Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
                                 cv2.putText(Img_WebCam,'Time: ',(5,15),Font_CV, .5,(255,255,255),1)
                                 cv2.putText(Img_WebCam,str(round((Arr_TiempoReal[3]) ,2)),(65,15),Font_CV, .5,(255,255,255),1)
                                 cv2.putText(Img_WebCam,'D: ',(5,35),Font_CV, .5,(255,255,255),1)
@@ -4153,7 +4148,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                             for i in range(0,len(Mat_Datos)): 
                                 Archivo_Mat_Datos.write(str(i) + ',' + str(round(Mat_Datos[i][0],3)) +
                                                                  ',' + str(round(Mat_Datos[i][1] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
-                                                                 ',' + str(round(Mat_Datos[i][2] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
+                                                                 ',' + str(round(Mat_Datos[i][2] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[16])),3)) +
                                                                  ',' + str(round(Mat_Datos[i][3],3)) +
                                                                  ',' + str(Mat_Datos[i][4]) + ';' + str(Mat_Datos[i][6]) +
                                                                  ',' + str(round(Mat_Datos[i][5],3)) + '\n')
@@ -4323,7 +4318,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                                 for i in range(0,len(Mat_Datos)): 
                                     Archivo_Mat_Datos.write(str(i) + ';' + str(round(Mat_Datos[i][0],3)) +
                                                                      ';' + str(round(Mat_Datos_X[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
-                                                                     ';' + str(round(Mat_Datos_Y[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[15])),3)) +
+                                                                     ';' + str(round(Mat_Datos_Y[i][j] * (Dev_Espacio_Tamano/int(Arr_Parametros_Imagen[16])),3)) +
                                                                      ';' + str(round((Mat_Datos_D[i,j]/100)/Mat_Datos[i,0],3)) +
                                                                      ';' + str(round(Mat_Datos_D[i][j],3)) +
                                                                      ';' + '0' + '\n')
@@ -5894,13 +5889,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                             Int_Contador_Cuadrante = Int_Contador_Cuadrante
                             
                             
-                        
-                    if Img_WebCam.shape[0] > Img_WebCam.shape[1]:     
-                        Img_WebCam = cv2.resize(Img_WebCam,(int((400/Img_WebCam.shape[0])*Img_WebCam.shape[1]), 400))
-                    elif Img_WebCam.shape[0] < Img_WebCam.shape[1]:     
-                        Img_WebCam = cv2.resize(Img_WebCam,(400, int((400/Img_WebCam.shape[1])*Img_WebCam.shape[0])))
-                    else:
-                        Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
+                    Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
                     
                     if C_Final_Sesion == 1:
                         cv2.putText(Img_WebCam,'C: ',(5,15),Font_CV, .5,(255,255,255),1)
@@ -7089,13 +7078,7 @@ def Fun_AbrirVentanaMenuPrincipal2():
                             Int_Contador_Cuadrante = Int_Contador_Cuadrante
                             
                             
-                        
-                    if Img_WebCam.shape[0] > Img_WebCam.shape[1]:     
-                        Img_WebCam = cv2.resize(Img_WebCam,(int((400/Img_WebCam.shape[0])*Img_WebCam.shape[1]), 400))
-                    elif Img_WebCam.shape[0] < Img_WebCam.shape[1]:     
-                        Img_WebCam = cv2.resize(Img_WebCam,(400, int((400/Img_WebCam.shape[1])*Img_WebCam.shape[0])))
-                    else:
-                        Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
+                    Img_WebCam = cv2.resize(Img_WebCam,(400, round((400/Img_WebCam.shape[1])*Img_WebCam.shape[1])))
                     
                     if C_Final_Sesion == 1:
                         cv2.putText(Img_WebCam,'C: ',(5,15),Font_CV, .5,(255,255,255),1)
