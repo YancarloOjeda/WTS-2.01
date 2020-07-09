@@ -83,7 +83,7 @@ Font_1 = 'Sans'
 # Dir_Images = 'C:/WALDEN/Images/'
 
 Dir_System = open("data.txt", "r")
-Dir_System = Dir_System.read() + '/WTS-2.01/'
+Dir_System = Dir_System.read() + '/WTS-2.01/WTS-2.01/'
 
 
 Dir_Videos = Dir_System+'Videos/'
